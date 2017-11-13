@@ -17,7 +17,7 @@ import lombok.ToString;
 public class PTLMethod extends RealmObject {
     String name;
     String description;
-    String nameOfClass;
+    String parentName;
 
 
 }

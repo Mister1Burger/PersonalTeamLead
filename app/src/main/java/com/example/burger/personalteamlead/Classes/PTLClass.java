@@ -18,7 +18,7 @@ import lombok.ToString;
 public class PTLClass extends RealmObject {
     String name;
     String description;
-    String nameOfProject;
+    String parentName;
 
 
 
