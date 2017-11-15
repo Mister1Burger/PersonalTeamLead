@@ -15,6 +15,8 @@ import java.util.List;
 public class ProjectModulesImpl implements  ProjectModule {
     RealmPTL realmPTL;
     Context context;
+    PTLProject ptlProject;
+
 
     public ProjectModulesImpl(RealmPTL realmPTL, Context context) {
         this.realmPTL = realmPTL;
@@ -22,12 +24,29 @@ public class ProjectModulesImpl implements  ProjectModule {
     }
 
     @Override
-    public List<PTLProject> getProgects (){
+    public List<PTLProject> getProjects (){
         return realmPTL.readPTLProject(context);
     }
 
     @Override
-    public void removeClass (PTLProject ptlProject){
-        realmPTL.removePTLClass(context, ptlProject.getName);
+    public void removeProject (PTLProject ptlProject){
+        realmPTL.removePTLProject(context, ptlProject.getName());
     }
+
+    @Override
+    public PTLProject getPtlProject() {
+        return ptlProject;
+    }
+
+    @Override
+    public void setPtlProject(PTLProject ptlProject) {
+        this.ptlProject = ptlProject;
+    }
+
+    @Override
+    public void addProject(PTLProject ptlProject) {
+        realmPTL.savePTLProject(context,ptlProject);
+    }
+
+
 }

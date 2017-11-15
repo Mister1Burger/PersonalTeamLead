@@ -8,4 +8,5 @@ import android.app.Fragment;
  */
 
 public class MethodsFragment extends Fragment{
+
 }

@@ -10,7 +10,13 @@ import java.util.List;
 
 public interface ProjectModule {
 
-    public List<PTLProject> getProgects();
+    public List<PTLProject> getProjects();
 
-    public void removeClass(PTLProject ptlProject);
+    public void removeProject(PTLProject ptlProject);
+
+    public PTLProject getPtlProject();
+
+    public void setPtlProject(PTLProject ptlProject);
+
+    void addProject(PTLProject ptlProject);
 }

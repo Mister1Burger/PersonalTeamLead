@@ -23,7 +23,7 @@ import io.realm.exceptions.RealmMigrationNeededException;
 public interface RealmPTL {
     Realm init(Context context);
 
-    List<PTLClass> readPTLClasses(Context context);
+    List<PTLClass> readPTLClasses(Context context, String parentName);
 
     void savePTLClass(Context context, PTLClass ptlClass);
 
@@ -31,7 +31,7 @@ public interface RealmPTL {
 
     void onDestroy(Context context);
 
-    List<PTLMethod> readPTLMethods(Context context);
+    List<PTLMethod> readPTLMethods(Context context, String parentName);
 
     void savePTLMethod(Context context, PTLMethod ptlMethods);
 

@@ -48,12 +48,14 @@ public class RealmPTLImpl implements RealmPTL {
     }
 
     @Override
-    public List<PTLClass> readPTLClasses(Context context) {
+    public List<PTLClass> readPTLClasses(Context context, String parentName) {
         Realm realm = init(context);
         File realmFile = new File(context.getFilesDir(), "reminder.realm");
         try {
             assert realm != null;
-            RealmResults<PTLClass> list = realm.where(PTLClass.class).findAll();
+            RealmResults<PTLClass> list = realm.where(PTLClass.class)
+                    .equalTo("ParentName", parentName)
+                    .findAll();
             Log.d( "TAG", String.valueOf(realmFile.length()));
             if (list == null)
                 return new ArrayList<>();
@@ -85,7 +87,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
            PTLClass ptlClass = realm.where(PTLClass.class)
-                    .equalTo("Name", parentName).findFirst();
+                    .equalTo("ParentName", parentName).findFirst();
             if(ptlClass!=null) {
                 realm.beginTransaction();
                 ptlClass.deleteFromRealm();
@@ -104,12 +106,14 @@ public class RealmPTLImpl implements RealmPTL {
     }
 
     @Override
-    public List<PTLMethod> readPTLMethods(Context context) {
+    public List<PTLMethod> readPTLMethods(Context context, String parentName) {
         Realm realm = init(context);
         File realmFile = new File(context.getFilesDir(), "reminder.realm");
         try {
             assert realm != null;
-            RealmResults<PTLMethod> list = realm.where(PTLMethod.class).findAll();
+            RealmResults<PTLMethod> list = realm.where(PTLMethod.class)
+                    .equalTo("ParentName", parentName)
+                    .findAll();
             Log.d( "TAG", String.valueOf(realmFile.length()));
             if (list == null)
                 return new ArrayList<>();
@@ -141,7 +145,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
             PTLMethod ptlMethods = realm.where(PTLMethod.class)
-                    .equalTo("Name", parentName).findFirst();
+                    .equalTo("ParentName", parentName).findFirst();
             if(ptlMethods!=null) {
                 realm.beginTransaction();
                 ptlMethods.deleteFromRealm();
@@ -190,7 +194,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
             PTLProject ptlProject = realm.where(PTLProject.class)
-                    .equalTo("Name", name).findFirst();
+                    .equalTo("ParentName", name).findFirst();
             if(ptlProject!=null) {
                 realm.beginTransaction();
                 ptlProject.deleteFromRealm();

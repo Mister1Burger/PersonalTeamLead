@@ -1,6 +1,7 @@
 package com.example.burger.personalteamlead.Modules;
 
 import com.example.burger.personalteamlead.Classes.PTLClass;
+import com.example.burger.personalteamlead.Methods.PTLMethod;
 
 import java.util.List;
 
@@ -10,7 +11,9 @@ import java.util.List;
 
 public interface MethodModule {
 
-     List<PTLClass> getClasses ();
+     List<PTLClass> getMethods (PTLMethod ptlMethod);
 
-     void removeClass (PTLClass ptlClass);
+     void removeMethod (PTLClass ptlClass);
+
+    void addMethod(PTLMethod ptlMethod, PTLClass ptlClass);
 }

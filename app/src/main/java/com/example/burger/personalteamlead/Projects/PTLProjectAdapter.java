@@ -54,13 +54,13 @@ public class PTLProjectAdapter extends RecyclerView.Adapter<PTLProjectAdapter.Us
     public void onBindViewHolder(PTLProjectAdapter.UserListViewHolder holder, final int position) {
         holder.tvText1.setText(getPTLProjects().get(position).getName());
         holder.linearLayout.setOnClickListener(view -> listener.getPTLProjectToListener(getPTLProjects().get(position)));
-
     }
 
-    public void addMethod(PTLProject ptlProject){
-        getPTLProjects().add(ptlProject);
-        notifyDataSetChanged();
-    }
+
+//    public void addMethod(PTLProject ptlProject){
+//        getPTLProjects().add(ptlProject);
+//        notifyDataSetChanged();
+//    }
 
 
     @Override
@@ -68,8 +68,8 @@ public class PTLProjectAdapter extends RecyclerView.Adapter<PTLProjectAdapter.Us
         return projects.size();
     }
 
-    public  void clear(){
-        getPTLProjects().clear();
-        notifyDataSetChanged();
-    }
+//    public  void clear(){
+//        getPTLProjects().clear();
+//        notifyDataSetChanged();
+//    }
 }

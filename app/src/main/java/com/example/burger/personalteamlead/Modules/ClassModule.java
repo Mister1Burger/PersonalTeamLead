@@ -3,6 +3,7 @@ package com.example.burger.personalteamlead.Modules;
 import android.content.Context;
 
 import com.example.burger.personalteamlead.Classes.PTLClass;
+import com.example.burger.personalteamlead.Projects.PTLProject;
 
 import java.util.List;
 
@@ -12,7 +13,13 @@ import java.util.List;
 
 public interface ClassModule {
 
-    List<PTLClass>  getClasses ();
+    List<PTLClass>  getClasses (PTLClass ptlClass);
 
     void removeClass (PTLClass ptlClass);
+
+    PTLClass getPtlClass();
+
+    void setPtlClass(PTLClass ptlClass);
+
+    void addClass(PTLClass ptlClass, PTLProject ptlProject);
 }
