@@ -180,10 +180,11 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
             realm.beginTransaction();
-            realm.copyToRealmOrUpdate(ptlProject);
+            realm.insert(ptlProject);
             Log.d( "TAG", String.valueOf(realmFile.length()));
             realm.commitTransaction();
-        } catch (NullPointerException ignore) {
+        } catch (Exception e) {
+
         }
     }
 

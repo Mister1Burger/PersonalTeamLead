@@ -57,10 +57,10 @@ public class PTLProjectAdapter extends RecyclerView.Adapter<PTLProjectAdapter.Us
     }
 
 
-//    public void addMethod(PTLProject ptlProject){
-//        getPTLProjects().add(ptlProject);
-//        notifyDataSetChanged();
-//    }
+    public void addProject(PTLProject ptlProject){
+        getPTLProjects().add(ptlProject);
+        notifyDataSetChanged();
+    }
 
 
     @Override

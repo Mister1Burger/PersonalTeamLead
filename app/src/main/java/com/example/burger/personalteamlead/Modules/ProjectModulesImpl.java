@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.burger.personalteamlead.Classes.PTLClass;
 import com.example.burger.personalteamlead.Projects.PTLProject;
+import com.example.burger.personalteamlead.Projects.PTLProjectAdapter;
 import com.example.burger.personalteamlead.Realm.RealmPTL;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ProjectModulesImpl implements  ProjectModule {
     RealmPTL realmPTL;
     Context context;
     PTLProject ptlProject;
+    PTLProjectAdapter ptlProjectAdapter;
 
 
     public ProjectModulesImpl(RealmPTL realmPTL, Context context) {
@@ -46,6 +48,14 @@ public class ProjectModulesImpl implements  ProjectModule {
     @Override
     public void addProject(PTLProject ptlProject) {
         realmPTL.savePTLProject(context,ptlProject);
+    }
+
+    public PTLProjectAdapter getPtlProjectAdapter() {
+        return ptlProjectAdapter;
+    }
+
+    public void setPtlProjectAdapter(PTLProjectAdapter ptlProjectAdapter) {
+        this.ptlProjectAdapter = ptlProjectAdapter;
     }
 
 

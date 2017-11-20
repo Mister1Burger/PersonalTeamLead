@@ -54,8 +54,9 @@ public class ProjectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         projects_list.setLayoutManager(llm);
+        projects = mAC.getProjectModule().getProjects();
         adapter = new PTLProjectAdapter(projects, project -> {
-            ((MainActivity)getActivity()).getFragment(FragmentsFalgs.CLASS, project.getName());
+            ((MainActivity)getActivity()).getFragment(FragmentsFalgs.CLASS,1, project.getName());
 
         });
         add_button.setOnClickListener(new View.OnClickListener() {

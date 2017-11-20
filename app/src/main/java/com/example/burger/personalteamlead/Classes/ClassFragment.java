@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.burger.personalteamlead.Controller.MainActivityControllerImpl;
 import com.example.burger.personalteamlead.MainActivity;
+import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
 
 import java.util.ArrayList;
@@ -42,15 +43,15 @@ public class ClassFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-       View view = inflater.inflate(butterknife.R.layout.class_activity, container,false);
+       View view = inflater.inflate(R.layout.class_fragment, container,false);
        ButterKnife.bind(this,view);
-       mAC = ((MainActivity)getActivity()).getmAC();
-       ptlClass = mAC.getClassModule().getPtlClass();
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        classes_list.setLayoutManager(llm);
-        classes = mAC.getClassModule().getClasses(ptlClass);
-        adapter = new PTLClassAdapter(classes,ptlClass1 ->  {
-        })
+//       mAC = ((MainActivity)getActivity()).getmAC();
+//       ptlClass = mAC.getClassModule().getPtlClass();
+//        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+//        classes_list.setLayoutManager(llm);
+//        classes = mAC.getClassModule().getClasses(ptlClass);
+//        adapter = new PTLClassAdapter(classes,ptlClass1 ->  {
+//        });
        return  view;
     }
 

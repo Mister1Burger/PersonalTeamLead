@@ -22,7 +22,7 @@ public class MethodModuleImpl implements MethodModule {
     }
 
     @Override
-    public List<PTLClass> getMethods (PTLMethod ptlMethod){
+    public List<PTLMethod> getMethods (PTLMethod ptlMethod){
         return realmPTL.readPTLMethods(context, ptlMethod.getParentName());
     }
 

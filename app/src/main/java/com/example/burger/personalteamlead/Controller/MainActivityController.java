@@ -13,7 +13,6 @@ import com.example.burger.personalteamlead.Realm.RealmPTLImpl;
 
 public interface MainActivityController {
     void init(RealmPTLImpl realmPTL, Context context);
-    public AddModule getAddModule();
 
     public ClassModule getClassModule();
 

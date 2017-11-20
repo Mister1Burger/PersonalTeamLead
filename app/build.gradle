@@ -14,20 +14,7 @@
                 testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
             }
 
-            signingConfigs {
-                debug {
-                    storeFile file('test.jks')
-                    storePassword '123456'
-                    keyAlias 'key0'
-                    keyPassword '123456'
-                }
-                release {
-                    storeFile file('test.jks')
-                    storePassword '123456'
-                    keyAlias 'key0'
-                    keyPassword '123456'
-                }
-            }
+
 
             buildTypes {
                 release {

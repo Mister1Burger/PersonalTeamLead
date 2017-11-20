@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface MethodModule {
 
-     List<PTLClass> getMethods (PTLMethod ptlMethod);
+     List<PTLMethod> getMethods (PTLMethod ptlMethod);
 
      void removeMethod (PTLClass ptlClass);
 

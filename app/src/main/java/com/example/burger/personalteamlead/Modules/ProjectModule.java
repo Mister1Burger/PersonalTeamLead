@@ -1,6 +1,7 @@
 package com.example.burger.personalteamlead.Modules;
 
 import com.example.burger.personalteamlead.Projects.PTLProject;
+import com.example.burger.personalteamlead.Projects.PTLProjectAdapter;
 
 import java.util.List;
 
@@ -19,4 +20,8 @@ public interface ProjectModule {
     public void setPtlProject(PTLProject ptlProject);
 
     void addProject(PTLProject ptlProject);
+
+    public PTLProjectAdapter getPtlProjectAdapter();
+
+    public void setPtlProjectAdapter(PTLProjectAdapter ptlProjectAdapter) ;
 }

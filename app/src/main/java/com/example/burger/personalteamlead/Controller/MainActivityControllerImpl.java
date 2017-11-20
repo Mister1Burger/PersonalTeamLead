@@ -15,7 +15,6 @@ import com.example.burger.personalteamlead.Realm.RealmPTLImpl;
  */
 
 public class MainActivityControllerImpl implements MainActivityController {
-    private AddModule addModule;
     private ClassModule classModule;
     private ProjectModule projectModule;
     private MethodModule methodModule;
@@ -23,17 +22,13 @@ public class MainActivityControllerImpl implements MainActivityController {
 
     @Override
     public void init(RealmPTLImpl realmPTL, Context context) {
-        addModule = new AddModuleImpl(realmPTL,context);
         classModule = new ClassModuleImpl(realmPTL,context);
         projectModule = new ProjectModulesImpl(realmPTL,context);
         methodModule = new MethodModuleImpl(realmPTL,context);
 
     }
 
-    @Override
-    public AddModule getAddModule() {
-        return addModule;
-    }
+
 
     @Override
     public ClassModule getClassModule() {
