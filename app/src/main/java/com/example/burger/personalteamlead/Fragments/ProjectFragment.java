@@ -46,7 +46,7 @@ public class ProjectFragment extends Fragment {
         this.falg = falg;
     }
 
-    MainActivityControllerImpl mAC;
+
 
     @Nullable
     @Override

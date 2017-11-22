@@ -2,8 +2,10 @@ package com.example.burger.personalteamlead.Fragments;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import com.example.burger.personalteamlead.Methods.PTLMethod;
 import com.example.burger.personalteamlead.Projects.PTLProject;
 import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
+import com.example.burger.personalteamlead.Realm.RealmPTLImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,11 +38,12 @@ public class AddFragment extends Fragment {
     Button cancel_btn;
     @BindView(R2.id.add_btn)
     Button add_btn;
-    MainActivityControllerImpl mAC;
+    MainActivityControllerImpl mAC ;
     int id;
     String parentName;
     FragmentsFalgs falg;
-    FragmentsMap fragmentsMap =  new FragmentsMap();
+    FragmentsMap fragmentsMap;
+    RealmPTLImpl realmPTL;
 
 
     public AddFragment() {
@@ -54,11 +58,16 @@ public class AddFragment extends Fragment {
         this.falg = falg;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.class_fragment, container,false);
+        View view = inflater.inflate(R.layout.add_fragment, container,false);
         ButterKnife.bind(this,view);
+        mAC = new MainActivityControllerImpl();
+        realmPTL = new RealmPTLImpl();
+        fragmentsMap = new FragmentsMap();
+        mAC.init(realmPTL, getContext());
         return view;
     }
 
@@ -83,17 +92,16 @@ public class AddFragment extends Fragment {
         PTLMethod ptlMethod = new PTLMethod();
         switch (id){
             case 1:
-            addProject(ptlProject);
-            mAC.getProjectModule().addProject(ptlProject);
-            mAC.getProjectModule().getPtlProjectAdapter().addProject(ptlProject);
+                mAC.getProjectModule().addProject(addProject(ptlProject));
+                mAC.getProjectModule().getPtlProjectAdapter().addProject(addProject(ptlProject));
             break;
             case 2:
-                addClass(ptlClass,parentName);
-                mAC.getClassModule().addClass(ptlClass, ptlProject);
+
+                mAC.getClassModule().addClass(addClass(ptlClass,parentName), addProject(ptlProject));
             break;
             case 3:
-                addMethod(ptlMethod,parentName);
-                mAC.getMethodModule().addMethod(ptlMethod,ptlClass);
+
+                mAC.getMethodModule().addMethod(addMethod(ptlMethod,parentName),addClass(ptlClass,parentName));
             break;
 
         }

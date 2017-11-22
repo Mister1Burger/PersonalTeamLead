@@ -16,13 +16,15 @@ import java.util.List;
 public class ProjectModulesImpl implements  ProjectModule {
     RealmPTL realmPTL;
     Context context;
-    PTLProject ptlProject;
+    PTLProject ptlProject ;
     PTLProjectAdapter ptlProjectAdapter;
 
 
     public ProjectModulesImpl(RealmPTL realmPTL, Context context) {
         this.realmPTL = realmPTL;
         this.context = context;
+        ptlProject = new PTLProject();
+        ptlProjectAdapter = new PTLProjectAdapter();
     }
 
     @Override
