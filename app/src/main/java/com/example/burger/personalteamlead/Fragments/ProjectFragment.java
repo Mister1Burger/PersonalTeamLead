@@ -1,5 +1,6 @@
-package com.example.burger.personalteamlead.Projects;
+package com.example.burger.personalteamlead.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,13 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.burger.personalteamlead.Classes.ClassFragment;
 import com.example.burger.personalteamlead.Controller.MainActivityControllerImpl;
 import com.example.burger.personalteamlead.MainActivity;
+import com.example.burger.personalteamlead.Projects.PTLProject;
+import com.example.burger.personalteamlead.Projects.PTLProjectAdapter;
 import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
-import com.example.burger.personalteamlead.utils.AddFragment;
-import com.example.burger.personalteamlead.utils.FragmentsFalgs;
 
 import java.util.List;
 
@@ -36,7 +36,15 @@ public class ProjectFragment extends Fragment {
     Button add_button;
     PTLProjectAdapter adapter;
     List<PTLProject> projects;
+    FragmentsFalgs falg;
 
+    public ProjectFragment() {
+    }
+
+    @SuppressLint("ValidFragment")
+    public ProjectFragment(FragmentsFalgs falg) {
+        this.falg = falg;
+    }
 
     MainActivityControllerImpl mAC;
 
@@ -54,7 +62,6 @@ public class ProjectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         projects_list.setLayoutManager(llm);
-        projects = mAC.getProjectModule().getProjects();
         adapter = new PTLProjectAdapter(projects, project -> {
             ((MainActivity)getActivity()).getFragment(FragmentsFalgs.CLASS,1, project.getName());
 

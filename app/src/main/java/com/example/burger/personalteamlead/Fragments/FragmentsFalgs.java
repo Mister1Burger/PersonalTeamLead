@@ -1,4 +1,4 @@
-package com.example.burger.personalteamlead.utils;
+package com.example.burger.personalteamlead.Fragments;
 
 /**
  * Created by java on 15.11.2017.

@@ -1,16 +1,13 @@
-package com.example.burger.personalteamlead.utils;
+package com.example.burger.personalteamlead.Fragments;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -21,7 +18,6 @@ import com.example.burger.personalteamlead.Methods.PTLMethod;
 import com.example.burger.personalteamlead.Projects.PTLProject;
 import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
-import com.example.burger.personalteamlead.Realm.RealmPTLImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,14 +26,20 @@ import butterknife.ButterKnife;
  * Created by java on 15.11.2017.
  */
 
-public class AddFragment extends DialogFragment {
+public class AddFragment extends Fragment {
     @BindView(R2.id.name_et)
     EditText name_et;
     @BindView(R2.id.description_et)
     EditText description_et;
+    @BindView(R2.id.cancel_btn)
+    Button cancel_btn;
+    @BindView(R2.id.add_btn)
+    Button add_btn;
     MainActivityControllerImpl mAC;
     int id;
     String parentName;
+    FragmentsFalgs falg;
+    FragmentsMap fragmentsMap =  new FragmentsMap();
 
 
     public AddFragment() {
@@ -46,32 +48,33 @@ public class AddFragment extends DialogFragment {
 
 
     @SuppressLint("ValidFragment")
-    public AddFragment(int id, String parentName) {
+    public AddFragment(int id, String parentName, FragmentsFalgs falg) {
         this.id = id;
         this.parentName = parentName;
+        this.falg = falg;
     }
-    @Override
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        // Get the layout inflater
-        LayoutInflater inflater = getActivity().getLayoutInflater();
 
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
-        builder.setView(inflater.inflate(R.layout.add_fragment, null))
-                // Add action buttons
-                .setPositiveButton("Add", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        addItem(id,parentName);
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        AddFragment.this.getDialog().cancel();
-                    }
-                });
-        return builder.create();
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.class_fragment, container,false);
+        ButterKnife.bind(this,view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        add_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addItem(id, parentName);
+                fragmentsMap.addFlag(falg,id,parentName);
+                ((MainActivity)getActivity()).getFragment(fragmentsMap.previousFragmet().getFlag(),fragmentsMap.previousFragmet().getId(),fragmentsMap.previousFragmet().getParentName());
+            }
+        });
+
+
     }
 
     public void addItem(int id, String parentName){

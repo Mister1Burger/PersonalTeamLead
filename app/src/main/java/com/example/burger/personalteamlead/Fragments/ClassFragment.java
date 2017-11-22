@@ -1,4 +1,4 @@
-package com.example.burger.personalteamlead.Classes;
+package com.example.burger.personalteamlead.Fragments;
 
 import android.app.Fragment;
 import android.os.Build;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.burger.personalteamlead.Classes.PTLClass;
+import com.example.burger.personalteamlead.Classes.PTLClassAdapter;
 import com.example.burger.personalteamlead.Controller.MainActivityControllerImpl;
 import com.example.burger.personalteamlead.MainActivity;
 import com.example.burger.personalteamlead.R;

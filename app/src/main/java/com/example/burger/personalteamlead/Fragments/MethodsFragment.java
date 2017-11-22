@@ -1,4 +1,4 @@
-package com.example.burger.personalteamlead.Methods;
+package com.example.burger.personalteamlead.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;

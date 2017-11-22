@@ -1,25 +1,23 @@
 package com.example.burger.personalteamlead;
 
-import android.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
-import com.example.burger.personalteamlead.Classes.ClassFragment;
-import com.example.burger.personalteamlead.Methods.MethodsFragment;
-import com.example.burger.personalteamlead.Projects.ProjectFragment;
-import com.example.burger.personalteamlead.utils.AddFragment;
-import com.example.burger.personalteamlead.utils.FragmentsFalgs;
+import com.example.burger.personalteamlead.Fragments.ClassFragment;
+import com.example.burger.personalteamlead.Fragments.MethodsFragment;
+import com.example.burger.personalteamlead.Fragments.ProjectFragment;
+import com.example.burger.personalteamlead.Fragments.AddFragment;
+import com.example.burger.personalteamlead.Fragments.FragmentsFalgs;
 
 public class MainActivity extends AppCompatActivity {
-    DialogFragment dialogFragment;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dialogFragment = new AddFragment();
         getFragmentManager().beginTransaction()
                 .replace(R.id.fragment, new ProjectFragment())
                 .commit();
@@ -36,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     public void getFragment(FragmentsFalgs flag, int id, String parentName) {
         switch (flag) {
             case ADD:
-                dialogFragment.show(getFragmentManager(),"tag");
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.fragment, new AddFragment(id,parentName,flag))
+                        .commit();
                 break;
             case METHOD:
                 getFragmentManager().beginTransaction()
@@ -50,13 +50,17 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case PROJECT:
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.fragment, new ProjectFragment())
+                        .replace(R.id.fragment, new ProjectFragment(flag))
                         .commit();
                 break;
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
 
     }
-
 }
