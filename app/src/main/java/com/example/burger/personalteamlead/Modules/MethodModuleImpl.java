@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.example.burger.personalteamlead.Classes.PTLClass;
 import com.example.burger.personalteamlead.Methods.PTLMethod;
-import com.example.burger.personalteamlead.Realm.RealmPTL;
+import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTL;
 
 import java.util.List;
 

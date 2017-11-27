@@ -15,13 +15,13 @@ public interface ProjectModule {
 
     public void removeProject(PTLProject ptlProject);
 
-    public PTLProject getPtlProject();
-
-    public void setPtlProject(PTLProject ptlProject);
+//    public PTLProject getPtlProject();
+//
+//    public void setPtlProject(PTLProject ptlProject);
 
     void addProject(PTLProject ptlProject);
 
-    public PTLProjectAdapter getPtlProjectAdapter();
+  //  public PTLProjectAdapter getPtlProjectAdapter();
 
-    public void setPtlProjectAdapter(PTLProjectAdapter ptlProjectAdapter) ;
+    //public void setPtlProjectAdapter(PTLProjectAdapter ptlProjectAdapter) ;
 }

@@ -1,11 +1,11 @@
 package com.example.burger.personalteamlead.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +20,7 @@ import com.example.burger.personalteamlead.Methods.PTLMethod;
 import com.example.burger.personalteamlead.Projects.PTLProject;
 import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
-import com.example.burger.personalteamlead.Realm.RealmPTLImpl;
+import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTLImpl;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,22 +41,11 @@ public class AddFragment extends Fragment {
     MainActivityControllerImpl mAC ;
     int id;
     String parentName;
-    FragmentsFalgs falg;
+    FragmentsFlags flag ;
     FragmentsMap fragmentsMap;
     RealmPTLImpl realmPTL;
 
 
-    public AddFragment() {
-    }
-
-
-
-    @SuppressLint("ValidFragment")
-    public AddFragment(int id, String parentName, FragmentsFalgs falg) {
-        this.id = id;
-        this.parentName = parentName;
-        this.falg = falg;
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
@@ -64,40 +53,41 @@ public class AddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.add_fragment, container,false);
         ButterKnife.bind(this,view);
-        mAC = new MainActivityControllerImpl();
-        realmPTL = new RealmPTLImpl();
+        mAC = ((MainActivity)getActivity()).getMAC() ;
         fragmentsMap = new FragmentsMap();
-        mAC.init(realmPTL, getContext());
+
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        add_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addItem(id, parentName);
-                fragmentsMap.addFlag(falg,id,parentName);
-                ((MainActivity)getActivity()).getFragment(fragmentsMap.previousFragmet().getFlag(),fragmentsMap.previousFragmet().getId(),fragmentsMap.previousFragmet().getParentName());
-            }
+        Log.d("TAG",String.valueOf(mAC.getTmpData().getId()));
+        Log.d("TAG", mAC.getTmpData().getParentName());
+        add_btn.setOnClickListener(view1 -> {
+            addItem(mAC.getTmpData().getId(), mAC.getTmpData().getParentName());
+            fragmentsMap.addFlag(mAC.getTmpData().getFlag(),mAC.getTmpData().getId(),mAC.getTmpData().getParentName());
+            Log.d("TAG",String.valueOf( fragmentsMap.previousFragment().getFlag()));
+                ((MainActivity)getActivity()).getFragment(fragmentsMap.previousFragment().getFlag(),fragmentsMap.previousFragment().getId(),fragmentsMap.previousFragment().getParentName());
         });
 
 
     }
 
     public void addItem(int id, String parentName){
-        PTLProject ptlProject = new PTLProject();
+
         PTLClass ptlClass =  new PTLClass();
         PTLMethod ptlMethod = new PTLMethod();
         switch (id){
-            case 1:
-                mAC.getProjectModule().addProject(addProject(ptlProject));
-                mAC.getProjectModule().getPtlProjectAdapter().addProject(addProject(ptlProject));
+            case 1:if (addProject() == null){
+                Log.d("TAG", "NULL");
+            }else {
+                mAC.getProjectModule().addProject(addProject());}
+               // mAC.getProjectModule().getPtlProjectAdapter().addProject(addProject(ptlProject));
             break;
             case 2:
 
-                mAC.getClassModule().addClass(addClass(ptlClass,parentName), addProject(ptlProject));
+                mAC.getClassModule().addClass(addClass(ptlClass,parentName), addProject());
             break;
             case 3:
 
@@ -106,7 +96,8 @@ public class AddFragment extends Fragment {
 
         }
     }
-    public PTLProject addProject (PTLProject ptlProject){
+    public PTLProject addProject (){
+        PTLProject ptlProject = new PTLProject();
         String name = name_et.getText().toString();
         if (name.length() == 0) {
             Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),

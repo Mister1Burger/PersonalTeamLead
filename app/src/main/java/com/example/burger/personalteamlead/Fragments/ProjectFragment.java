@@ -1,6 +1,5 @@
 package com.example.burger.personalteamlead.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
@@ -24,11 +23,22 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Created by java on 15.11.2017.
  */
-
+@ToString
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProjectFragment extends Fragment {
     @BindView(R2.id.projects_list)
     RecyclerView projects_list;
@@ -36,23 +46,19 @@ public class ProjectFragment extends Fragment {
     Button add_button;
     PTLProjectAdapter adapter;
     List<PTLProject> projects;
-    FragmentsFalgs falg;
-
-    public ProjectFragment() {
-    }
-
-    @SuppressLint("ValidFragment")
-    public ProjectFragment(FragmentsFalgs falg) {
-        this.falg = falg;
-    }
+    FragmentsFlags flag;
+    MainActivityControllerImpl mAC;
 
 
 
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.project_fragment,container,false);
         ButterKnife.bind(this,view);
+        mAC = ((MainActivity)getActivity()).getMAC();
         return  view;
     }
 
@@ -62,14 +68,15 @@ public class ProjectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         projects_list.setLayoutManager(llm);
+        projects = mAC.getRealmPTL().readPTLProject(getContext());
         adapter = new PTLProjectAdapter(projects, project -> {
-            ((MainActivity)getActivity()).getFragment(FragmentsFalgs.CLASS,1, project.getName());
+            ((MainActivity)getActivity()).getFragment(FragmentsFlags.CLASS,1, project.getName());
 
         });
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).getFragment(FragmentsFalgs.ADD,1,"");
+                ((MainActivity)getActivity()).getFragment(FragmentsFlags.ADD,1,"");
             }
         });
     }

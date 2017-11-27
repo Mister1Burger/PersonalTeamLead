@@ -1,4 +1,6 @@
-package com.example.burger.personalteamlead.Fragments;
+package com.example.burger.personalteamlead.TMP;
+
+import com.example.burger.personalteamlead.Fragments.FragmentsFlags;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,7 +10,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Created by java on 22.11.2017.
+ * Created by java on 27.11.2017.
  */
 @ToString
 @Getter
@@ -16,8 +18,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PreviousFragment {
-    private FragmentsFlags flag;
-    private String parentName;
-    private int id;
+public class TmpData {
+    int id;
+    FragmentsFlags flag;
+    String parentName;
+
 }

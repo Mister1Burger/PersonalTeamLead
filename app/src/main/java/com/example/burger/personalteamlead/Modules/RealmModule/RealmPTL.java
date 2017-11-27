@@ -1,20 +1,14 @@
-package com.example.burger.personalteamlead.Realm;
+package com.example.burger.personalteamlead.Modules.RealmModule;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.burger.personalteamlead.Classes.PTLClass;
 import com.example.burger.personalteamlead.Methods.PTLMethod;
 import com.example.burger.personalteamlead.Projects.PTLProject;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
-import io.realm.exceptions.RealmMigrationNeededException;
 
 /**
  * Created by java on 13.11.2017.

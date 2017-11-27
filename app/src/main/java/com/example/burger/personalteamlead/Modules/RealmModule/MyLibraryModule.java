@@ -1,4 +1,4 @@
-package com.example.burger.personalteamlead.Realm;
+package com.example.burger.personalteamlead.Modules.RealmModule;
 
 import io.realm.annotations.RealmModule;
 
