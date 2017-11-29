@@ -1,5 +1,7 @@
 package com.example.burger.personalteamlead.Fragments;
 
+import com.example.burger.personalteamlead.Fragments.FragmentsFlags;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

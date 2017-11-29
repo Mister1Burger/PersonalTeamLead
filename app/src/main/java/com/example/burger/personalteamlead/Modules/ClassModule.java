@@ -17,9 +17,5 @@ public interface ClassModule {
 
     void removeClass (PTLClass ptlClass);
 
-    PTLClass getPtlClass();
-
-    void setPtlClass(PTLClass ptlClass);
-
-    void addClass(PTLClass ptlClass, PTLProject ptlProject);
+    void addClass(PTLClass ptlClass);
 }

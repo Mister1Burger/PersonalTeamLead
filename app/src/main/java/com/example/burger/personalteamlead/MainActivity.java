@@ -2,12 +2,14 @@ package com.example.burger.personalteamlead;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 
 import com.example.burger.personalteamlead.Controller.MainActivityControllerImpl;
 import com.example.burger.personalteamlead.Fragments.ClassFragment;
 import com.example.burger.personalteamlead.Fragments.FragmentsFlags;
 import com.example.burger.personalteamlead.Fragments.MethodsFragment;
+import com.example.burger.personalteamlead.Fragments.PreviousFragment;
 import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTLImpl;
 import com.example.burger.personalteamlead.TMP.TmpData;
 
@@ -72,8 +74,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
+        PreviousFragment previousFragment = mAC.getFragmentMap().previousFragment();
+        if(mAC.getFragmentMap().getFragmentsQuantity() == 1){
+            getFragment(FragmentsFlags.PROJECT,1,"");}
+        else  if (previousFragment.getFlag()!= FragmentsFlags.PROJECT){
+                getFragment(previousFragment.getFlag(),previousFragment.getId(),previousFragment.getParentName());}
+        else {
+            finish();
+        }
 
     }
 }

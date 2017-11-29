@@ -53,7 +53,7 @@ public class PTLClassAdapter extends RecyclerView.Adapter<PTLClassAdapter.UserLi
    @Override
     public void onBindViewHolder(UserListViewHolder holder, final int position) {
         holder.tvText1.setText(getPTLClass().get(position).getName());
-        holder.linearLayout.setOnClickListener(view -> listener.getPTLClassToListner(getPTLClass().get(position)));
+        holder.linearLayout.setOnClickListener(view -> listener.getPTLClassToListener(getPTLClass().get(position)));
 
     }
 

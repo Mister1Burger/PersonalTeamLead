@@ -8,6 +8,8 @@ import com.example.burger.personalteamlead.Fragments.MethodsFragment;
 import com.example.burger.personalteamlead.Fragments.ProjectFragment;
 import com.example.burger.personalteamlead.Modules.ClassModule;
 import com.example.burger.personalteamlead.Modules.ClassModuleImpl;
+import com.example.burger.personalteamlead.Modules.FragmentMap;
+import com.example.burger.personalteamlead.Modules.FragmentMapImpl;
 import com.example.burger.personalteamlead.Modules.MethodModule;
 import com.example.burger.personalteamlead.Modules.MethodModuleImpl;
 import com.example.burger.personalteamlead.Modules.ProjectModule;
@@ -28,26 +30,28 @@ public class MainActivityControllerImpl implements MainActivityController {
     private ProjectFragment projectFragment;
     private ClassFragment classFragment;
     private MethodsFragment methodsFragment;
-    TmpData tmpData;
-    RealmPTLImpl realmPTL = new RealmPTLImpl();
+    private TmpData tmpData;
+    private RealmPTL realmPTL;
+    private FragmentMap fragmentMap;
+
 
 
     @Override
     public void init(Context context) {
-        classModule = new ClassModuleImpl(realmPTL,context);
-        projectModule = new ProjectModulesImpl(realmPTL,context);
-        methodModule = new MethodModuleImpl(realmPTL,context);
+        realmPTL = new RealmPTLImpl();
         addFragment = new AddFragment();
         projectFragment = new ProjectFragment();
         classFragment =  new ClassFragment();
         methodsFragment = new MethodsFragment();
         tmpData = new TmpData();
-
-
+        fragmentMap = new FragmentMapImpl();
+        classModule = new ClassModuleImpl(realmPTL,context);
+        projectModule = new ProjectModulesImpl(realmPTL,context);
+        methodModule = new MethodModuleImpl(realmPTL,context);
     }
 
     @Override
-    public RealmPTLImpl getRealmPTL(){
+    public RealmPTL getRealmPTL(){
         return realmPTL;
     }
 
@@ -90,4 +94,7 @@ public class MainActivityControllerImpl implements MainActivityController {
     public MethodModule getMethodModule() {
         return methodModule;
     }
+
+    @Override
+    public FragmentMap getFragmentMap(){ return fragmentMap; }
 }

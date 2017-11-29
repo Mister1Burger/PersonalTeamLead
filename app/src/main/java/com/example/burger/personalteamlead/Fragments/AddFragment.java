@@ -39,11 +39,7 @@ public class AddFragment extends Fragment {
     @BindView(R2.id.add_btn)
     Button add_btn;
     MainActivityControllerImpl mAC ;
-    int id;
-    String parentName;
-    FragmentsFlags flag ;
-    FragmentsMap fragmentsMap;
-    RealmPTLImpl realmPTL;
+    PreviousFragment previousFragment;
 
 
 
@@ -54,44 +50,38 @@ public class AddFragment extends Fragment {
         View view = inflater.inflate(R.layout.add_fragment, container,false);
         ButterKnife.bind(this,view);
         mAC = ((MainActivity)getActivity()).getMAC() ;
-        fragmentsMap = new FragmentsMap();
-
         return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("TAG",String.valueOf(mAC.getTmpData().getId()));
-        Log.d("TAG", mAC.getTmpData().getParentName());
         add_btn.setOnClickListener(view1 -> {
             addItem(mAC.getTmpData().getId(), mAC.getTmpData().getParentName());
-            fragmentsMap.addFlag(mAC.getTmpData().getFlag(),mAC.getTmpData().getId(),mAC.getTmpData().getParentName());
-            Log.d("TAG",String.valueOf( fragmentsMap.previousFragment().getFlag()));
-                ((MainActivity)getActivity()).getFragment(fragmentsMap.previousFragment().getFlag(),fragmentsMap.previousFragment().getId(),fragmentsMap.previousFragment().getParentName());
+            ((MainActivity)getActivity()).getFragment(previousFragment.getFlag(),previousFragment.getId(),previousFragment.getParentName());
         });
+    }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAC.getFragmentMap().addFlag(mAC.getTmpData().getFlag(),mAC.getTmpData().getId(),mAC.getTmpData().getParentName());
+        previousFragment = mAC.getFragmentMap().previousFragment();
     }
 
     public void addItem(int id, String parentName){
-
-        PTLClass ptlClass =  new PTLClass();
         PTLMethod ptlMethod = new PTLMethod();
         switch (id){
             case 1:if (addProject() == null){
                 Log.d("TAG", "NULL");
             }else {
                 mAC.getProjectModule().addProject(addProject());}
-               // mAC.getProjectModule().getPtlProjectAdapter().addProject(addProject(ptlProject));
             break;
             case 2:
-
-                mAC.getClassModule().addClass(addClass(ptlClass,parentName), addProject());
+                mAC.getClassModule().addClass(addClass(parentName));
             break;
             case 3:
-
-                mAC.getMethodModule().addMethod(addMethod(ptlMethod,parentName),addClass(ptlClass,parentName));
+               // mAC.getMethodModule().addMethod(addMethod(ptlMethod,parentName),addClass(ptlClass,parentName));
             break;
 
         }
@@ -114,12 +104,12 @@ public class AddFragment extends Fragment {
             toast.show();
         }else {
             ptlProject.setDescription(description);
-
         }
         return ptlProject;
     }
 
-    public PTLClass addClass (PTLClass ptlClass, String parentName){
+    public PTLClass addClass (String parentName){
+        PTLClass ptlClass =  new PTLClass();
         String name = name_et.getText().toString();
         if (name.length() == 0) {
             Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
@@ -127,7 +117,6 @@ public class AddFragment extends Fragment {
             toast.show();
         }else {
             ptlClass.setName(name);
-
         }
         String description = description_et.getText().toString();
         if (name.length() == 0) {
@@ -136,7 +125,6 @@ public class AddFragment extends Fragment {
             toast.show();
         }else {
             ptlClass.setDescription(description);
-
         }
         ptlClass.setParentName(parentName);
         return ptlClass;

@@ -15,7 +15,6 @@ import java.util.List;
 public class ClassModuleImpl implements ClassModule {
     RealmPTL realmPTL;
     Context context;
-    PTLClass ptlClass;
 
     public ClassModuleImpl(RealmPTL realmPTL, Context context) {
         this.realmPTL = realmPTL;
@@ -33,19 +32,7 @@ public class ClassModuleImpl implements ClassModule {
     }
 
     @Override
-    public PTLClass getPtlClass() {
-        return ptlClass;
-    }
-
-    @Override
-    public void setPtlClass(PTLClass ptlClass) {
-        this.ptlClass = ptlClass;
-    }
-
-    @Override
-    public void addClass(PTLClass ptlClass, PTLProject ptlProject) {
-        ptlClass.setParentName(ptlProject.getName());
+    public void addClass(PTLClass ptlClass) {
         realmPTL.savePTLClass(context,ptlClass);
-
     }
 }

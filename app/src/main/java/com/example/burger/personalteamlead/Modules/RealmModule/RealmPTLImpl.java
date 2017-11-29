@@ -54,7 +54,7 @@ public class RealmPTLImpl implements RealmPTL {
         try {
             assert realm != null;
             RealmResults<PTLClass> list = realm.where(PTLClass.class)
-                    .equalTo("ParentName", parentName)
+                    .equalTo("parentName", parentName)
                     .findAll();
             Log.d( "TAG", String.valueOf(realmFile.length()));
             if (list == null)
@@ -87,7 +87,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
            PTLClass ptlClass = realm.where(PTLClass.class)
-                    .equalTo("ParentName", parentName).findFirst();
+                    .equalTo("parentName", parentName).findFirst();
             if(ptlClass!=null) {
                 realm.beginTransaction();
                 ptlClass.deleteFromRealm();

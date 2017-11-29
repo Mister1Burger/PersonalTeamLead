@@ -18,8 +18,10 @@ import com.example.burger.personalteamlead.Classes.PTLClass;
 import com.example.burger.personalteamlead.Classes.PTLClassAdapter;
 import com.example.burger.personalteamlead.Controller.MainActivityControllerImpl;
 import com.example.burger.personalteamlead.MainActivity;
+import com.example.burger.personalteamlead.Projects.PTLProjectAdapter;
 import com.example.burger.personalteamlead.R;
 import com.example.burger.personalteamlead.R2;
+import com.example.burger.personalteamlead.TMP.TmpData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,13 +34,14 @@ public class ClassFragment extends Fragment {
     Button add_button_class;
     @BindView(R2.id.path_in_class_tv)
     TextView pathTV;
+    @BindView(R2.id.description_class_tv)
+    TextView descriptionTV;
     @BindView(R2.id.classes_list)
     RecyclerView classes_list;
     MainActivityControllerImpl mAC;
-    PTLClassAdapter adapter;
+    TmpData tmpData;
     List<PTLClass> classes;
-    PTLClass ptlClass;
-
+    PTLClassAdapter adapter;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -47,18 +50,29 @@ public class ClassFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
        View view = inflater.inflate(R.layout.class_fragment, container,false);
        ButterKnife.bind(this,view);
-//       mAC = ((MainActivity)getActivity()).getmAC();
-//       ptlClass = mAC.getClassModule().getPtlClass();
-//        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-//        classes_list.setLayoutManager(llm);
-//        classes = mAC.getClassModule().getClasses(ptlClass);
-//        adapter = new PTLClassAdapter(classes,ptlClass1 ->  {
-//        });
+        mAC = ((MainActivity)getActivity()).getMAC();
        return  view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        classes_list.setLayoutManager(llm);
+        add_button_class.setOnClickListener(view1 -> ((MainActivity)getActivity()).getFragment(FragmentsFlags.ADD,2,tmpData.getParentName()));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onStart() {
+        super.onStart();
+        tmpData = mAC.getTmpData();
+        pathTV.setText(tmpData.getParentName());
+        descriptionTV.setText(tmpData.getDescription());
+        mAC.getFragmentMap().addFlag(tmpData.getFlag(),tmpData.getId(),tmpData.getParentName());
+        classes = mAC.getRealmPTL().readPTLClasses(getContext(),tmpData.getParentName());
+        adapter = new PTLClassAdapter(classes, ptlClass -> ((MainActivity)getActivity()).getFragment(FragmentsFlags.CLASS,2, tmpData.getParentName()));
+       classes_list.setAdapter(adapter);
     }
 }

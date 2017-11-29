@@ -16,8 +16,6 @@ public class ProjectModulesImpl implements  ProjectModule {
     RealmPTL realmPTL;
     Context context;
 
-    PTLProjectAdapter ptlProjectAdapter;
-
 
     public ProjectModulesImpl(RealmPTL realmPTL, Context context) {
         this.realmPTL = realmPTL;
@@ -36,28 +34,13 @@ public class ProjectModulesImpl implements  ProjectModule {
         realmPTL.removePTLProject(context, ptlProject.getName());
     }
 
-//    @Override
-//    public PTLProject getPtlProject() {
-//        return ptlProject;
-//    }
-//
-//    @Override
-//    public void setPtlProject(PTLProject ptlProject) {
-//        this.ptlProject = ptlProject;
-//    }
 
     @Override
     public void addProject(PTLProject ptlProject) {
         realmPTL.savePTLProject(context,ptlProject);
     }
 
-   // public PTLProjectAdapter getPtlProjectAdapter() {
-   //     return ptlProjectAdapter;
-   // }
 
-//    public void setPtlProjectAdapter(PTLProjectAdapter ptlProjectAdapter) {
-//        this.ptlProjectAdapter = ptlProjectAdapter;
-//    }
 
 
 }

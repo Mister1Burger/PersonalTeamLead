@@ -22,5 +22,6 @@ public class TmpData {
     int id;
     FragmentsFlags flag;
     String parentName;
+    String description;
 
 }

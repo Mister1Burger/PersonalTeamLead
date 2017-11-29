@@ -7,9 +7,10 @@ import com.example.burger.personalteamlead.Fragments.ClassFragment;
 import com.example.burger.personalteamlead.Fragments.MethodsFragment;
 import com.example.burger.personalteamlead.Fragments.ProjectFragment;
 import com.example.burger.personalteamlead.Modules.ClassModule;
+import com.example.burger.personalteamlead.Modules.FragmentMap;
 import com.example.burger.personalteamlead.Modules.MethodModule;
 import com.example.burger.personalteamlead.Modules.ProjectModule;
-import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTLImpl;
+import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTL;
 import com.example.burger.personalteamlead.TMP.TmpData;
 
 /**
@@ -25,7 +26,7 @@ public interface MainActivityController {
 
     public MethodModule getMethodModule();
 
-    RealmPTLImpl getRealmPTL();
+    RealmPTL getRealmPTL();
 
     TmpData getTmpData();
 
@@ -36,4 +37,6 @@ public interface MainActivityController {
     public ClassFragment getClassFragment();
 
     public MethodsFragment getMethodsFragment() ;
+
+    FragmentMap getFragmentMap();
 }

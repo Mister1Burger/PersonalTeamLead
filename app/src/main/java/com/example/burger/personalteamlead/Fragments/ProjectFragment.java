@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,20 +47,17 @@ public class ProjectFragment extends Fragment {
     Button add_button;
     PTLProjectAdapter adapter;
     List<PTLProject> projects;
-    FragmentsFlags flag;
     MainActivityControllerImpl mAC;
-
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.project_fragment,container,false);
-        ButterKnife.bind(this,view);
-        mAC = ((MainActivity)getActivity()).getMAC();
-        return  view;
+        View view = inflater.inflate(R.layout.project_fragment, container, false);
+        ButterKnife.bind(this, view);
+        mAC = ((MainActivity) getActivity()).getMAC();
+        return view;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -68,17 +66,22 @@ public class ProjectFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         projects_list.setLayoutManager(llm);
-        projects = mAC.getRealmPTL().readPTLProject(getContext());
-        adapter = new PTLProjectAdapter(projects, project -> {
-            ((MainActivity)getActivity()).getFragment(FragmentsFlags.CLASS,1, project.getName());
-
-        });
-        add_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((MainActivity)getActivity()).getFragment(FragmentsFlags.ADD,1,"");
-            }
-        });
+        add_button.setOnClickListener(view1 -> ((MainActivity) getActivity()).getFragment(FragmentsFlags.ADD, 1, ""));
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAC.getFragmentMap().addFlag(FragmentsFlags.PROJECT, 1, "");
+        mAC.getFragmentMap().clear();
+        projects = mAC.getRealmPTL().readPTLProject(getContext());
+        adapter = new PTLProjectAdapter(projects, project -> {
+            ((MainActivity) getActivity()).getFragment(FragmentsFlags.CLASS, 2, project.getName());
+            Log.d("TAG", project.getName());
+            mAC.getTmpData().setDescription(project.getDescription());
+            mAC.getTmpData().setParentName(project.getName());
+        });
+        projects_list.setAdapter(adapter);
+    }
 }

@@ -54,6 +54,7 @@ public class PTLProjectAdapter extends RecyclerView.Adapter<PTLProjectAdapter.Us
     public void onBindViewHolder(PTLProjectAdapter.UserListViewHolder holder, final int position) {
         holder.tvText1.setText(getPTLProjects().get(position).getName());
         holder.linearLayout.setOnClickListener(view -> listener.getPTLProjectToListener(getPTLProjects().get(position)));
+        holder.linearLayout.setOnLongClickListener(view -> {listener.getPTLProjectToListener(getPTLProjects().get(position));return  false;});
     }
 
 
