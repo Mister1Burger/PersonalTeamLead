@@ -15,5 +15,5 @@ public interface MethodModule {
 
      void removeMethod (PTLClass ptlClass);
 
-    void addMethod(PTLMethod ptlMethod, PTLClass ptlClass);
+    void addMethod(PTLMethod ptlMethod);
 }

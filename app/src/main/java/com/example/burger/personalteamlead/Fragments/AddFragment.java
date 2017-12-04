@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,7 @@ public class AddFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         add_btn.setOnClickListener(view1 -> {
             addItem(mAC.getTmpData().getId(), mAC.getTmpData().getParentName());
+            previousFragment = mAC.getFragmentMap().previousFragment();
             ((MainActivity)getActivity()).getFragment(previousFragment.getFlag(),previousFragment.getId(),previousFragment.getParentName());
         });
     }
@@ -66,11 +68,12 @@ public class AddFragment extends Fragment {
     public void onStart() {
         super.onStart();
         mAC.getFragmentMap().addFlag(mAC.getTmpData().getFlag(),mAC.getTmpData().getId(),mAC.getTmpData().getParentName());
-        previousFragment = mAC.getFragmentMap().previousFragment();
+        Log.d("TAG",String.valueOf(String.valueOf(mAC.getTmpData().getFlag()) + " /" + String.valueOf(mAC.getTmpData().getId()) + "/ " + String.valueOf(mAC.getTmpData().getParentName())));
+        Log.d("TAG", String.valueOf(mAC.getFragmentMap().getFragmentsQuantity()));
     }
 
     public void addItem(int id, String parentName){
-        PTLMethod ptlMethod = new PTLMethod();
+
         switch (id){
             case 1:if (addProject() == null){
                 Log.d("TAG", "NULL");
@@ -81,29 +84,30 @@ public class AddFragment extends Fragment {
                 mAC.getClassModule().addClass(addClass(parentName));
             break;
             case 3:
-               // mAC.getMethodModule().addMethod(addMethod(ptlMethod,parentName),addClass(ptlClass,parentName));
+                mAC.getMethodModule().addMethod(addMethod(parentName));
             break;
 
         }
     }
     public PTLProject addProject (){
         PTLProject ptlProject = new PTLProject();
-        String name = name_et.getText().toString();
-        if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+        if (TextUtils.isEmpty(name_et.getText())) {
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the Name", Toast.LENGTH_SHORT);
             toast.show();
         }else {
-            ptlProject.setName(name);
+            ptlProject.setName(String.valueOf(name_et.getText()));
+
 
         }
-        String description = description_et.getText().toString();
-        if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+
+        if (TextUtils.isEmpty(description_et.getText())) {
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the description", Toast.LENGTH_SHORT);
             toast.show();
         }else {
-            ptlProject.setDescription(description);
+            ptlProject.setDescription(String.valueOf(description_et.getText()));
+
         }
         return ptlProject;
     }
@@ -112,42 +116,45 @@ public class AddFragment extends Fragment {
         PTLClass ptlClass =  new PTLClass();
         String name = name_et.getText().toString();
         if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the Name", Toast.LENGTH_SHORT);
             toast.show();
         }else {
             ptlClass.setName(name);
+            name_et.setText(null);
         }
         String description = description_et.getText().toString();
-        if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+        if (description.length() == 0) {
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the description", Toast.LENGTH_SHORT);
             toast.show();
         }else {
             ptlClass.setDescription(description);
+            description_et.setText(null);
         }
         ptlClass.setParentName(parentName);
         return ptlClass;
     }
 
-    public PTLMethod addMethod (PTLMethod ptlMethod, String parentName){
+    public PTLMethod addMethod (String parentName){
+        PTLMethod ptlMethod = new PTLMethod();
         String name = name_et.getText().toString();
         if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the Name", Toast.LENGTH_SHORT);
             toast.show();
         }else {
             ptlMethod.setName(name);
-
+            name_et.setText(null);
         }
         String description = description_et.getText().toString();
-        if (name.length() == 0) {
-            Toast toast = Toast.makeText(((MainActivity)getActivity().getBaseContext()),
+        if (description.length() == 0) {
+            Toast toast = Toast.makeText(getActivity(),
                     "Enter the description", Toast.LENGTH_SHORT);
             toast.show();
         }else {
             ptlMethod.setDescription(description);
-
+            description_et.setText(null);
         }
         ptlMethod.setParentName(parentName);
         return ptlMethod;

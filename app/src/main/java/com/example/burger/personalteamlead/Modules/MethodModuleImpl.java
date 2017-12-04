@@ -32,8 +32,7 @@ public class MethodModuleImpl implements MethodModule {
     }
 
     @Override
-    public void addMethod(PTLMethod ptlMethod, PTLClass ptlClass) {
-        ptlMethod.setParentName(ptlClass.getName());
+    public void addMethod(PTLMethod ptlMethod) {
         realmPTL.savePTLMethod(context,ptlMethod);
     }
 }

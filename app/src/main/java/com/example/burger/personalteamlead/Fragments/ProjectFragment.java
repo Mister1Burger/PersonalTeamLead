@@ -78,7 +78,6 @@ public class ProjectFragment extends Fragment {
         projects = mAC.getRealmPTL().readPTLProject(getContext());
         adapter = new PTLProjectAdapter(projects, project -> {
             ((MainActivity) getActivity()).getFragment(FragmentsFlags.CLASS, 2, project.getName());
-            Log.d("TAG", project.getName());
             mAC.getTmpData().setDescription(project.getDescription());
             mAC.getTmpData().setParentName(project.getName());
         });

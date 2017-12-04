@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,8 +72,12 @@ public class ClassFragment extends Fragment {
         pathTV.setText(tmpData.getParentName());
         descriptionTV.setText(tmpData.getDescription());
         mAC.getFragmentMap().addFlag(tmpData.getFlag(),tmpData.getId(),tmpData.getParentName());
+        Log.d("TAG",String.valueOf(tmpData.getFlag() + " /" + String.valueOf(tmpData.getId()) + "/ " + String.valueOf(tmpData.getParentName())));
+        Log.d("TAG", String.valueOf(mAC.getFragmentMap().getFragmentsQuantity()));
         classes = mAC.getRealmPTL().readPTLClasses(getContext(),tmpData.getParentName());
-        adapter = new PTLClassAdapter(classes, ptlClass -> ((MainActivity)getActivity()).getFragment(FragmentsFlags.CLASS,2, tmpData.getParentName()));
+        adapter = new PTLClassAdapter(classes, ptlClass -> {((MainActivity)getActivity()).getFragment(FragmentsFlags.METHOD,3, tmpData.getParentName());
+            mAC.getTmpData().setDescription(ptlClass.getDescription());
+            mAC.getTmpData().setParentName(ptlClass.getName());});
        classes_list.setAdapter(adapter);
     }
 }

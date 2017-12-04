@@ -40,25 +40,27 @@ public class FragmentMapImpl implements FragmentMap {
                 break;
 
             case CLASS:
+                previousFragments.remove(previousFragments.size()-1);
                 fragment.setFlag(FragmentsFlags.PROJECT);
                 fragment.setId(0);
                 fragment.setParentName(null);
-                previousFragments.remove(previousFragments.size()-1);
-
-
                 break;
 
             case METHOD:
+                Log.d("TAG",String.valueOf("Было" + previousFragments.size()));
+                previousFragments.remove(previousFragments.size()-1);
+                Log.d("TAG",String.valueOf("Стало" + previousFragments.size()));
                 fragment.setFlag(FragmentsFlags.CLASS);
                 fragment.setId(previousFragments.get(previousFragments.size()-1).getId());
                 fragment.setParentName(String.valueOf(previousFragments.get(previousFragments.size()-1).getParentName()));
-                previousFragments.remove(previousFragments.size());
                 break;
 
             case ADD:
                 if (previousFragments.size()>1){
                     previousFragments.remove(previousFragments.size()-1);
-                    previousFragment();
+                    fragment.setFlag(previousFragments.get(previousFragments.size() - 1).getFlag());
+                    fragment.setId(previousFragments.get(previousFragments.size()-1).getId());
+                    fragment.setParentName(previousFragments.get(previousFragments.size()-1).getParentName());
                 }else {
                     fragment.setFlag(FragmentsFlags.PROJECT);
                     fragment.setId(0);

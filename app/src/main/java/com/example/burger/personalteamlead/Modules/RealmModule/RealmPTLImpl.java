@@ -73,7 +73,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
             realm.beginTransaction();
-            realm.copyToRealmOrUpdate(ptlClass);
+            realm.insert(ptlClass);
             Log.d( "TAG", String.valueOf(realmFile.length()));
             realm.commitTransaction();
         } catch (NullPointerException ignore) {
@@ -112,7 +112,7 @@ public class RealmPTLImpl implements RealmPTL {
         try {
             assert realm != null;
             RealmResults<PTLMethod> list = realm.where(PTLMethod.class)
-                    .equalTo("ParentName", parentName)
+                    .equalTo("parentName", parentName)
                     .findAll();
             Log.d( "TAG", String.valueOf(realmFile.length()));
             if (list == null)
@@ -131,7 +131,7 @@ public class RealmPTLImpl implements RealmPTL {
         assert realm != null;
         try {
             realm.beginTransaction();
-            realm.copyToRealmOrUpdate(ptlMethods);
+            realm.insert(ptlMethods);
             Log.d( "TAG", String.valueOf(realmFile.length()));
             realm.commitTransaction();
         } catch (NullPointerException ignore) {

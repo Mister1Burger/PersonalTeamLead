@@ -4,32 +4,35 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/title_tv"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
         android:id="@+id/path_in_method_tv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="1"
+        android:scrollbars="horizontal"/>
+
+    <TextView
+        android:id="@+id/description_method_tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:scrollbars="vertical" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/methods_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="9">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_weight="9" />
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            />
-    </LinearLayout>
+    <Button
+        android:id="@+id/add_button_method"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

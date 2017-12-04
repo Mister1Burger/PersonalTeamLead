@@ -10,8 +10,6 @@ import com.example.burger.personalteamlead.Fragments.ClassFragment;
 import com.example.burger.personalteamlead.Fragments.FragmentsFlags;
 import com.example.burger.personalteamlead.Fragments.MethodsFragment;
 import com.example.burger.personalteamlead.Fragments.PreviousFragment;
-import com.example.burger.personalteamlead.Modules.RealmModule.RealmPTLImpl;
-import com.example.burger.personalteamlead.TMP.TmpData;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -74,12 +72,19 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         PreviousFragment previousFragment = mAC.getFragmentMap().previousFragment();
-        if(mAC.getFragmentMap().getFragmentsQuantity() == 1){
-            getFragment(FragmentsFlags.PROJECT,1,"");}
-        else  if (previousFragment.getFlag()!= FragmentsFlags.PROJECT){
-                getFragment(previousFragment.getFlag(),previousFragment.getId(),previousFragment.getParentName());}
+        if (previousFragment.getFlag()!= FragmentsFlags.PROJECT){
+                getFragment(previousFragment.getFlag(),previousFragment.getId(),previousFragment.getParentName());
+        Log.d("TAG",String.valueOf(previousFragment.getFlag()));
+        Log.d("TAG", String.valueOf(mAC.getFragmentMap().getFragmentsQuantity()));}
+        else  if (previousFragment.getFlag() == FragmentsFlags.PROJECT ){
+            getFragment(FragmentsFlags.PROJECT,0,"");
+              Log.d("TAG",String.valueOf(previousFragment.getFlag()));
+              Log.d("TAG", String.valueOf(mAC.getFragmentMap().getFragmentsQuantity()));}
         else {
+            Log.d("TAG", String.valueOf(mAC.getFragmentMap().getFragmentsQuantity()));
+            Log.d("TAG",String.valueOf(previousFragment.getFlag()) );
             finish();
         }
 
